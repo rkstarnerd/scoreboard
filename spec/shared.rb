@@ -4,7 +4,7 @@ RSpec.configure do |rspec|
   rspec.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-RSpec.shared_context "shared", :shared_context => :metadata do
+RSpec.shared_context "shared", shared_context: :metadata do
   let(:org) { github_org }
 
   let(:repos_response) do

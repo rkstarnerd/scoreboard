@@ -31,11 +31,11 @@ RSpec.describe GithubService do
     allow_any_instance_of(Github::Client)
       .to receive_message_chain('pull_requests.all') { pulls_response }
 
-    pulls = GithubService.pulls_since(Date.new(2011, 1, 1), org, repo_name)
+    pulls = GithubService.pulls_since(Time.new(2011, 1, 1), org, repo_name)
 
     expect(pulls.count).to eq 2
 
-    pulls = GithubService.pulls_since(Date.new(2019, 1, 1), org, repo_name)
+    pulls = GithubService.pulls_since(Time.new(2019, 1, 1), org, repo_name)
 
     expect(pulls.count).to eq 1
 
