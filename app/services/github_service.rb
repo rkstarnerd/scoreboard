@@ -43,7 +43,7 @@ class GithubService
       define_method(method.to_sym) do |org, repo_name, pull_number|
         GITHUB_CLIENT.pull_requests
                      .send(method)
-                     .list(org, repo_name, number: pull_number)
+                     .list(org, repo_name, pull_number)
       end
     end
 
