@@ -2,13 +2,20 @@ class ScoreboardController < ApplicationController
   def by_org
     org          = params[:org]
     repos        = GithubService.repos(org)
-    pulls        = org_pull_requests(org, repos)
-    reviews      = org_reviews(org, pulls)
-    comments     = org_comments(org, pulls)
 
-    @contributors = org_contributors(pulls, reviews, comments)
+    if repos.empty?
+      render status: :ok, json: {
+        message: 'There have been no recent contributions to this org'
+      }
+    else
+      pulls        = org_pull_requests(org, repos)
+      reviews      = org_reviews(org, pulls)
+      comments     = org_comments(org, pulls)
 
-    render template: 'scoreboard/by_org.json.jbuilder'
+      @contributors = org_contributors(pulls, reviews, comments)
+
+      render template: 'scoreboard/by_org.json.jbuilder'
+    end
   end
 
   private
