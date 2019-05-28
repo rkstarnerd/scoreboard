@@ -29,7 +29,6 @@ class GithubService
       from_sunday = Date.today - (7 + DAYS_AFTER_SUNDAY[day])
       to_saturday = from_sunday + DAYS_AFTER_SUNDAY['saturday']
 
-      binding.pry
       pulls_between(from_sunday, to_saturday, org, repo_name)
     end
 
