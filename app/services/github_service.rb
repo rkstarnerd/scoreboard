@@ -14,16 +14,23 @@ class GithubService
       GITHUB_CLIENT.pull_requests.all(user: org, repo: repo_name)
     end
 
-    def pulls_since(date, org, repo_name)
-      date_range = date..Date.today
+    def pulls_between(from, to, org, repo_name)
+      date_range = from..to
       pulls = pulls(org, repo_name)
 
       pulls.select { |pull| date_range.cover? Date.parse(pull['created_at']) }
     end
 
+    def pulls_since(date, org, repo_name)
+      pulls_between(date, Date.today, org, repo_name)
+    end
+
     def past_week_pulls(org, repo_name)
-      last_week_date = Date.today - 7
-      pulls_since(last_week_date, org, repo_name)
+      from_sunday = Date.today - (7 + DAYS_AFTER_SUNDAY[day])
+      to_saturday = from_sunday + DAYS_AFTER_SUNDAY['saturday']
+
+      binding.pry
+      pulls_between(from_sunday, to_saturday, org, repo_name)
     end
 
     PULL_REQUEST_METHODS.each do |method|
@@ -32,6 +39,15 @@ class GithubService
                      .send(method)
                      .list(org, repo_name, number: pull_number)
       end
+    end
+
+    DAYS_AFTER_SUNDAY = {
+      'sunday' => 0, 'monday' => 1, 'tuesday' => 2, 'wednesday' => 3,
+      'thursday' => 4, 'friday' => 5, 'saturday' => 6,
+    }
+
+    def day
+      Date.today.strftime("%A").downcase
     end
   end
 end

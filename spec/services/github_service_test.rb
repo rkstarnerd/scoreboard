@@ -1,8 +1,6 @@
 require 'rails_helper'
 require './spec/shared'
 
-RSpec.configure { |c| c.include Helpers }
-
 RSpec.describe GithubService do
   include_context "shared"
 
