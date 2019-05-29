@@ -1,24 +1,18 @@
-# README
+# Developer Scoreboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a small API to determine an organization's github contributions in the past week (Sunday-Saturday) and declare a winner.
 
-Things you may want to cover:
+| Type of Contribution | Points |
+| :-: | :-: |
+| Pull Request | 9 |
+| Pull Request Review | 3 |
+| Pull Request Comment | 1 |
 
-* Ruby version
+### Run locallly
 
-* System dependencies
+1. ```git clone https://github.com/rkstarnerd/scoreboard.git```
+2. ```bundle install```
+3. ```rails s```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Request
+``` http://localhost:3000/scoreboard/org/:org_name ```
