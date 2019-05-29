@@ -19,8 +19,8 @@ RSpec.describe ScoreboardController, type: :controller do
 
     expected_body = {
       contributors: [
-        { contributor: { pull_requests: 9, comments: 0, reviews: 0, total: 9 } },
-        { octocat:     { pull_requests: 0, comments: 1, reviews: 3, total: 4 } }
+        { contributor: { pull_requests: 9, total: 9 } },
+        { octocat:     { reviews: 3, total: 4, comments: 1 } }
       ],
       winner: 'contributor'
     }.to_json
